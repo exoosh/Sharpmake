@@ -3522,8 +3522,9 @@ namespace Sharpmake.Generators.VisualStudio
 
             SelectOption
             (
-            Options.Option(Options.CSharp.Prefer32Bit.Enabled, () => { options["Prefer32Bit"] = RemoveLineTag; }),
-            Options.Option(Options.CSharp.Prefer32Bit.Disabled, () => { options["Prefer32Bit"] = "false"; })
+            Options.Option(Options.CSharp.Prefer32Bit.Enabled, () => { options["Prefer32Bit"] = "true"; }),
+            Options.Option(Options.CSharp.Prefer32Bit.Disabled, () => { options["Prefer32Bit"] = "false"; }),
+            Options.Option(Options.CSharp.Prefer32Bit.Unset, () => { options["Prefer32Bit"] = RemoveLineTag; })
             );
 
             SelectOption
