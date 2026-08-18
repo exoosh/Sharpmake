@@ -2114,6 +2114,7 @@ namespace Sharpmake
             {
                 Enabled = 0,
                 Disabled = 1,
+                Unset = 2,
             }
             public enum ProduceReferenceAssembly
             {
