@@ -240,6 +240,7 @@ namespace Sharpmake
         public Sharpmake.Strings AdditionalNoneCopyIfNewer;
         public Sharpmake.Strings AdditionalRuntimeTemplates;
         public Sharpmake.Strings AnalyzerDllFilePaths;
+        public string AppDesignerFolder;
         public Sharpmake.Strings ApplicationDefinitionFilenames;
         public string ApplicationIcon;
         public string ApplicationManifest;
@@ -293,7 +294,12 @@ namespace Sharpmake
         public CSharpProject() { }
         public CSharpProject(System.Type targetType) { }
         public CSharpProject(System.Type targetType, System.Type configurationType) { }
+        public bool? EnableDefaultApplicationDefinition { get; set; }
+        public bool? EnableDefaultCompileItems { get; set; }
+        public bool? EnableDefaultEmbeddedResourceItems { get; set; }
         public bool EnableDefaultItems { get; set; }
+        public bool? EnableDefaultNoneItems { get; set; }
+        public bool? EnableDefaultPageItems { get; set; }
         public void AddCSharpSpecificImportProjects(System.Collections.Generic.List<Sharpmake.ImportProject> importProjects, Sharpmake.DevEnv devEnv) { }
         protected override void ExcludeOutputFiles() { }
         public virtual string GetLinkFolder(string file) { }
@@ -485,6 +491,12 @@ namespace Sharpmake
         public int Priority { get; }
         public int CompareTo(Sharpmake.ConfigurePriority other) { }
         public override string ToString() { }
+    }
+    public enum CopyToOutputDirectory
+    {
+        Never = 0,
+        Always = 1,
+        PreserveNewest = 2,
     }
     public static class DebugBreaks
     {
@@ -1017,10 +1029,23 @@ namespace Sharpmake
         public void Merge(Sharpmake.GenerationOutput other) { }
         public override string ToString() { }
     }
+    public enum GlobItemType
+    {
+        Compile = 0,
+        None = 1,
+        Content = 2,
+        EmbeddedResource = 3,
+        Page = 4,
+        Resource = 5,
+    }
     public class GlobSetting
     {
+        public Sharpmake.CopyToOutputDirectory? CopyToOutputDirectory;
         public string Exclude;
         public string Include;
+        public Sharpmake.GlobItemType ItemType;
+        public string Remove;
+        public string Update;
         public GlobSetting() { }
     }
     public static class GlobalRegexMatchCache

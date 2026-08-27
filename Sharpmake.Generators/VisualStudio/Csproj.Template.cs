@@ -32,7 +32,7 @@ namespace Sharpmake.Generators.VisualStudio
     <PlatformTarget Condition="" '$(Platform)' == '' "">[defaultPlatform]</PlatformTarget>
     <ProjectGuid>{[guid]}</ProjectGuid>
     <OutputType>[outputType]</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <AppDesignerFolder>[appDesignerFolder]</AppDesignerFolder>
     <RootNamespace>[project.RootNamespace]</RootNamespace>
     <AssemblyName>[assemblyName]</AssemblyName>
     <SignAssembly>[options.SignAssembly]</SignAssembly>
@@ -93,6 +93,11 @@ namespace Sharpmake.Generators.VisualStudio
     <AutoGenerateBindingRedirects>[options.AutoGenerateBindingRedirects]</AutoGenerateBindingRedirects>
     <SonarQubeExclude>[options.SonarQubeExclude]</SonarQubeExclude>
     <EnableDefaultItems>[netCoreEnableDefaultItems]</EnableDefaultItems>
+    <EnableDefaultCompileItems>[enableDefaultCompileItems]</EnableDefaultCompileItems>
+    <EnableDefaultEmbeddedResourceItems>[enableDefaultEmbeddedResourceItems]</EnableDefaultEmbeddedResourceItems>
+    <EnableDefaultNoneItems>[enableDefaultNoneItems]</EnableDefaultNoneItems>
+    <EnableDefaultApplicationDefinition>[enableDefaultApplicationDefinition]</EnableDefaultApplicationDefinition>
+    <EnableDefaultPageItems>[enableDefaultPageItems]</EnableDefaultPageItems>
     <DefaultItemExcludes>[defaultItemExcludes]</DefaultItemExcludes>
     <GenerateAssemblyInfo>[GeneratedAssemblyConfigTemplate.GenerateAssemblyInfo]</GenerateAssemblyInfo>
     <GenerateAssemblyConfigurationAttribute>[GeneratedAssemblyConfigTemplate.GenerateAssemblyConfigurationAttribute]</GenerateAssemblyConfigurationAttribute>
@@ -113,6 +118,12 @@ namespace Sharpmake.Generators.VisualStudio
     <UseWindowsForms>[options.UseWindowsForms]</UseWindowsForms>
     <Nullable>[options.Nullable]</Nullable>
     <PublishAot>[options.PublishAot]</PublishAot>
+  </PropertyGroup>
+";
+
+                public static string BaseIntermediateOutputPathPropertyGroup =
+@"  <PropertyGroup>
+    <BaseIntermediateOutputPath>[baseIntermediateOutputPath]</BaseIntermediateOutputPath>
   </PropertyGroup>
 ";
 
@@ -319,6 +330,9 @@ namespace Sharpmake.Generators.VisualStudio
                 public static string SimpleNone =
 @"    <None Include=""[include]"" />
 ";
+                public static string SimpleNoneWithExclude =
+@"    <None Include=""[include]"" Exclude=""[exclude]"" />
+";
                 public static string Link =
 @"      <Link>[link]</Link>
 ";
@@ -425,6 +439,42 @@ namespace Sharpmake.Generators.VisualStudio
 @"    <VSIXSourceItem Include=""[vsixSourceItem]"" />
 ";
 
+                public static string CompileRemove =
+@"    <Compile Remove=""[remove]"" />
+";
+
+                public static string NoneUpdate =
+@"    <None Update=""[update]"">
+      <CopyToOutputDirectory>[copyToOutputDirectory]</CopyToOutputDirectory>
+    </None>
+";
+
+                public static string ContentUpdate =
+@"    <Content Update=""[update]"">
+      <CopyToOutputDirectory>[copyToOutputDirectory]</CopyToOutputDirectory>
+    </Content>
+";
+
+                public static string NoneRemove =
+@"    <None Remove=""[remove]"" />
+";
+
+                public static string ContentRemove =
+@"    <Content Remove=""[remove]"" />
+";
+
+                public static string EmbeddedResourceRemove =
+@"    <EmbeddedResource Remove=""[remove]"" />
+";
+
+                public static string PageRemove =
+@"    <Page Remove=""[remove]"" />
+";
+
+                public static string ResourceRemove =
+@"    <Resource Remove=""[remove]"" />
+";
+
                 public static string PageBegin =
 @"    <Page Include=""[include]"">
 ";
@@ -479,6 +529,10 @@ namespace Sharpmake.Generators.VisualStudio
 
                 public static string ProjectReferenceBegin =
 @"    <ProjectReference Include=""[include]"">
+";
+
+                public static string ProjectReferenceSelfClosing =
+@"    <ProjectReference Include=""[include]"" />
 ";
 
                 public static string ProjectGUID =
