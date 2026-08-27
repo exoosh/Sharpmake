@@ -357,6 +357,34 @@
             ]
         },
         {
+            "Name": "NetCore-EnableDefaultItemsHelloWorld",
+            "CIs": [ "github", "gitlab" ],
+            "OSs": [ "windows-2022" ],
+            "Frameworks": [ "net8.0" ],
+            "Configurations": [ "debug", "release" ],
+            "TestFolder": "samples/NetCore/EnableDefaultItemsHelloWorld",
+            "Commands":
+            [
+                "./RunSharpmake.ps1 -workingDirectory {testFolder} -sharpmakeFile \"HelloWorld.sharpmake.cs\" -framework {framework}",
+                "./Compile.ps1 -slnOrPrjFile \"HelloWorldSolution.vs2022.net8_0.sln\" -configuration {configuration} -platform \"Any CPU\" -WorkingDirectory \"{testFolder}/projects/HelloWorld\" -VsVersion {os} -compiler MsBuild",
+                "&'./{testFolder}/codebase/HelloWorld/output/anycpu/{configuration}/net8.0/HelloWorld.exe'"
+            ]
+        },
+        {
+            "Name": "NetCore-EnableDefaultItemsFinegrained",
+            "CIs": [ "github", "gitlab" ],
+            "OSs": [ "windows-2022" ],
+            "Frameworks": [ "net8.0" ],
+            "Configurations": [ "debug", "release" ],
+            "TestFolder": "samples/NetCore/EnableDefaultItemsFinegrained",
+            "Commands":
+            [
+                "./RunSharpmake.ps1 -workingDirectory {testFolder} -sharpmakeFile \"HelloWorld.sharpmake.cs\" -framework {framework}",
+                "./Compile.ps1 -slnOrPrjFile \"HelloWorldDefaultItemsFinegrainedSolution.vs2022.net8_0.sln\" -configuration {configuration} -platform \"Any CPU\" -WorkingDirectory \"{testFolder}/projects/HelloWorldDefaultItemsFinegrained\" -VsVersion {os} -compiler MsBuild",
+                "&'./{testFolder}/codebase/HelloWorldDefaultItemsFinegrained/output/anycpu/{configuration}/net8.0/HelloWorldDefaultItemsFinegrained.exe'"
+            ]
+        },
+        {
             "Name": "PackageReferences",
             "CIs": [ "github", "gitlab" ],
             "OSs": [ "windows-2019", "windows-2022" ],

@@ -88,10 +88,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\helloworldlib\HelloWorldLib.vs2019.csproj">
-      <Project>{2118a95f-4fda-d7c9-6cc8-a7a85a81062e}</Project>
-      <Name>HelloWorldLib</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\helloworldlib\HelloWorldLib.vs2019.csproj" />
   </ItemGroup>
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
 </Project>

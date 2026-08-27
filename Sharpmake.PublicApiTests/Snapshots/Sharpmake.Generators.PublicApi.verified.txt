@@ -449,7 +449,6 @@ namespace Sharpmake.Generators.VisualStudio
         public const string ProjectExtension = ".csproj";
         public CSproj() { }
         public static System.Collections.Concurrent.ConcurrentBag<Sharpmake.Generators.VisualStudio.CSproj.CsProjSubTypesInfos> AllCsProjSubTypesInfos { get; }
-        public void AddPreImportCustomProperties(System.Collections.Generic.Dictionary<string, string> properties, Sharpmake.CSharpProject cSharpProject, string projectPath) { }
         public void Generate(Sharpmake.Builder builder, Sharpmake.Project project, System.Collections.Generic.List<Sharpmake.Project.Configuration> configurations, string projectFile, System.Collections.Generic.List<string> generatedFiles, System.Collections.Generic.List<string> skipFiles) { }
         [System.Serializable]
         public class CsProjSubTypesInfos
@@ -509,9 +508,12 @@ namespace Sharpmake.Generators.VisualStudio
                 public static string CompileBegin;
                 public static string CompileBeginWithExclude;
                 public static string CompileEnd;
+                public static string CompileRemove;
                 public static string ContentBegin;
                 public static string ContentEnd;
+                public static string ContentRemove;
                 public static string ContentSimple;
+                public static string ContentUpdate;
                 public static string CopyToOutputDirectory;
                 public static string DependentUpon;
                 public static string DesignTime;
@@ -519,6 +521,7 @@ namespace Sharpmake.Generators.VisualStudio
                 public static string EmbedInteropTypes;
                 public static string EmbeddedResourceBegin;
                 public static string EmbeddedResourceEnd;
+                public static string EmbeddedResourceRemove;
                 public static string EntityDeployBegin;
                 public static string EntityDeployEnd;
                 public static string FileAssociationItem;
@@ -537,13 +540,17 @@ namespace Sharpmake.Generators.VisualStudio
                 public static string MergeWithCto;
                 public static string NoneItemGroupBegin;
                 public static string NoneItemGroupEnd;
+                public static string NoneRemove;
+                public static string NoneUpdate;
                 public static string PageBegin;
                 public static string PageEnd;
+                public static string PageRemove;
                 public static string Private;
                 public static string ProjectGUID;
                 public static string ProjectRefName;
                 public static string ProjectReferenceBegin;
                 public static string ProjectReferenceEnd;
+                public static string ProjectReferenceSelfClosing;
                 public static string Protobuf;
                 public static string PublishFile;
                 public static string ReferenceBegin;
@@ -552,11 +559,13 @@ namespace Sharpmake.Generators.VisualStudio
                 public static string ResourceBegin;
                 public static string ResourceEnd;
                 public static string ResourceName;
+                public static string ResourceRemove;
                 public static string Service;
                 public static string SimpleCompile;
                 public static string SimpleCompileWithExclude;
                 public static string SimpleEmbeddedResource;
                 public static string SimpleNone;
+                public static string SimpleNoneWithExclude;
                 public static string SimpleReference;
                 public static string SimpleResource;
                 public static string SimpleWebReference;
@@ -575,6 +584,7 @@ namespace Sharpmake.Generators.VisualStudio
                 public const string DefaultProjectConfigurationCondition = "\'$(Configuration)|$(Platform)\'==\'[conf.Name]|[platformName]\'";
                 public const string MultiFrameworkProjectConfigurationCondition = ("\'$(Configuration)|$(Platform)|$(TargetFramework)\'==\'[conf.Name]|[platformName]|[t" +
                     "argetFramework]\'");
+                public static string BaseIntermediateOutputPathPropertyGroup;
                 public static string ImportProjectItem;
                 public static string ImportProjectItemSimple;
                 public static string ImportProjectSdkItem;

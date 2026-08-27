@@ -108,10 +108,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HelloWorldLib\HelloWorldLib.vs2022.csproj">
-      <Project>{854a5e48-aa9b-c244-2088-0c41cb5ab42b}</Project>
-      <Name>HelloWorldLib</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\HelloWorldLib\HelloWorldLib.vs2022.csproj" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)'=='net6.0' OR '$(TargetFramework)'=='net6.0-windows'">
     <PackageReference Include="Microsoft.Windows.Compatibility" Version="6.0.6" />

@@ -2896,12 +2896,15 @@ namespace Sharpmake
 
                 resolver.SetParameter("conf", this);
                 resolver.SetParameter("target", Target);
+                if (IntermediatePath == null)
+                    CompilerPdbFilePath = null;
                 resolver.Resolve(this);
 
                 Util.ResolvePath(Project.SharpmakeCsPath, ref ProjectPath);
                 if (DebugBreaks.ShouldBreakOnProjectPath(DebugBreaks.Context.Resolving, Path.Combine(ProjectPath, ProjectFileName) + (Project is CSharpProject ? ".csproj" : ".vcxproj"), this))
                     System.Diagnostics.Debugger.Break();
-                Util.ResolvePath(Project.SharpmakeCsPath, ref IntermediatePath);
+                if (IntermediatePath != null)
+                    Util.ResolvePath(Project.SharpmakeCsPath, ref IntermediatePath);
                 if (!string.IsNullOrEmpty(BaseIntermediateOutputPath))
                     Util.ResolvePath(Project.SharpmakeCsPath, ref BaseIntermediateOutputPath);
                 Util.ResolvePath(Project.SharpmakeCsPath, ref LibraryPaths);
