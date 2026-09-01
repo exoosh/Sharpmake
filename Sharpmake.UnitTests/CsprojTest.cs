@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Ubisoft. All Rights Reserved.
 // Licensed under the Apache 2.0 License. See LICENSE.md in the project root for license information.
 
+using System;
 using System.IO;
 using System.Linq;
 using NUnit.Framework;
@@ -306,6 +307,63 @@ namespace Sharpmake.UnitTests
             Assert.That(project, Is.Not.Null);
             foreach (var conf in project.Configurations)
                 Assert.That(conf.IntermediatePath, Is.Null);
+        }
+    }
+
+    [TestFixture]
+    public class ProjectReferenceGuidTest
+    {
+        private static string Resolve(CSproj.ItemGroups.ProjectReference pr)
+            => pr.Resolve(new Resolver());
+
+        [Test]
+        public void GuidAndNamePresentForNonSdkProject()
+        {
+            var guid = Guid.NewGuid();
+            var pr = new CSproj.ItemGroups.ProjectReference
+            {
+                Include = "Foo.csproj",
+                Project = guid,
+                Name = "Foo",
+                IsNetCore = false,
+            };
+            var xml = Resolve(pr);
+            Assert.That(xml, Does.Contain($"<Project>{guid:B}</Project>"));
+            Assert.That(xml, Does.Contain("<Name>Foo</Name>"));
+        }
+
+        [Test]
+        public void GuidAbsentForSdkProjectByDefault()
+        {
+            var guid = Guid.NewGuid();
+            var pr = new CSproj.ItemGroups.ProjectReference
+            {
+                Include = "Bar.csproj",
+                Project = guid,
+                Name = "Bar",
+                IsNetCore = true,
+                ForceGuid = false,
+            };
+            var xml = Resolve(pr);
+            Assert.That(xml, Does.Not.Contain("<Project>"));
+            Assert.That(xml, Does.Not.Contain("<Name>"));
+        }
+
+        [Test]
+        public void GuidPresentForSdkProjectWhenForceGuidTrue()
+        {
+            var guid = Guid.NewGuid();
+            var pr = new CSproj.ItemGroups.ProjectReference
+            {
+                Include = "Bar.csproj",
+                Project = guid,
+                Name = "Bar",
+                IsNetCore = true,
+                ForceGuid = true,
+            };
+            var xml = Resolve(pr);
+            Assert.That(xml, Does.Contain($"<Project>{guid:B}</Project>"));
+            Assert.That(xml, Does.Not.Contain("<Name>"));
         }
     }
 

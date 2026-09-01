@@ -151,6 +151,19 @@ public MyLibrary()
 }
 ```
 
+## Project references
+
+For SDK-style projects, `<ProjectReference>` entries omit the optional `<Project>` GUID by default — MSBuild resolves by path and does not need it. Legacy (non-SDK) projects continue to emit both `<Project>` and `<Name>` as before.
+
+If your IDE requires the GUID for code-navigation (e.g. Rider reports spurious "Ambiguous reference" errors without it — see [RIDER-26499](https://youtrack.jetbrains.com/issue/RIDER-26499/Ambiguous-reference)), opt in per project:
+
+```csharp
+public MyProject()
+{
+    ForceProjectReferenceGuid = true;
+}
+```
+
 ## Summary
 
 A minimal SDK-style project declaration looks like this:

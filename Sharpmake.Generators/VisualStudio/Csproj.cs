@@ -716,6 +716,9 @@ namespace Sharpmake.Generators.VisualStudio
                 public bool? ReferenceOutputAssembly = true;
                 public string IncludeOutputGroupsInVSIX = null;
                 public bool IsNetCore = false;
+                // When true, <Project> GUID is always emitted even for SDK-style projects.
+                // Keeps IDE code-navigation working in tools that rely on it (e.g. Rider, RIDER-26499).
+                public bool ForceGuid = false;
 
                 public string Resolve(Resolver resolver)
                 {
@@ -727,11 +730,10 @@ namespace Sharpmake.Generators.VisualStudio
                     using (resolver.NewScopedParameter("IncludeOutputGroupsInVSIX", IncludeOutputGroupsInVSIX))
                     {
                         var inner = new StringWriter();
-                        if (!IsNetCore)
-                        {
+                        if (!IsNetCore || ForceGuid)
                             inner.Write(Template.ItemGroups.ProjectGUID);
+                        if (!IsNetCore)
                             inner.Write(Template.ItemGroups.ProjectRefName);
-                        }
                         // Absent Private = copy (both old-style and SDK); must emit false explicitly to suppress.
                         // https://github.com/dotnet/msbuild/blob/main/src/Tasks/Microsoft.Common.CurrentVersion.targets#L5300
                         if (!Private)
@@ -1597,6 +1599,7 @@ namespace Sharpmake.Generators.VisualStudio
                                 ReferenceOutputAssembly = dependency.ReferenceOutputAssembly,
                                 IncludeOutputGroupsInVSIX = includeOutputGroupsInVsix,
                                 IsNetCore = isNetCoreProjectSchema,
+                                ForceGuid = project.ForceProjectReferenceGuid,
                             });
                         }
                     }
@@ -1621,6 +1624,7 @@ namespace Sharpmake.Generators.VisualStudio
                                              .ProjectReferences),
                         Project = projectGuid,
                         IsNetCore = isNetCoreProjectSchema,
+                        ForceGuid = project.ForceProjectReferenceGuid,
                     });
                 }
             }
