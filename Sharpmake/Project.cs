@@ -2461,6 +2461,10 @@ namespace Sharpmake
 
         public Strings DefaultItemExcludes = new Strings();
 
+        // When true, emit <Project> GUID in <ProjectReference> for SDK-style projects.
+        // Opt in if your IDE requires it for code-navigation (e.g. Rider, RIDER-26499).
+        public bool ForceProjectReferenceGuid = false;
+
         public bool IncludeResxAsResources = true;
         public string RootNamespace;
         public Platform? DefaultPlatform;

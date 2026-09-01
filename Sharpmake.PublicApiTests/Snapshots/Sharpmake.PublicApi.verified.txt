@@ -259,6 +259,7 @@ namespace Sharpmake
         public Sharpmake.Strings EmbeddedResourceExtensions;
         public bool ExplicitNugetRestoreProjectStyle;
         public System.Collections.Generic.List<Sharpmake.FileAssociationItem> FileAssociationItems;
+        public bool ForceProjectReferenceGuid;
         public bool GenerateDocumentationFile;
         public Sharpmake.GeneratedAssemblyConfig GeneratedAssemblyConfig;
         public System.Collections.Generic.List<Sharpmake.GlobSetting> Globs;
