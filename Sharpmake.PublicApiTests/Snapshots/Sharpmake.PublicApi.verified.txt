@@ -3422,6 +3422,10 @@ namespace Sharpmake
                     GNU17 = 8,
                     GNU20 = 9,
                 }
+                public class CustomBuildSettings : Sharpmake.Strings
+                {
+                    public CustomBuildSettings(params string[] settings) { }
+                }
                 public enum DeadStrip
                 {
                     Disable = 0,
